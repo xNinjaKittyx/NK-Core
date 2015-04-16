@@ -1,0 +1,6 @@
+name: NKCore
+main: io.github.xNinjaKittyx.NKCore.NKCore
+version: 0.1
+author: xNinjaKittyx
+description: The Core Plugin of the NinjaKitty Suite
+softdepend: [PermissionsEx, Vault]
