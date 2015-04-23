@@ -1,5 +1,6 @@
 package io.github.xNinjaKittyx.NKCore;
 
+import io.github.xNinjaKittyx.NKCore.Commands.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,32 +19,59 @@ public class cmdEx implements CommandExecutor{
 
         // TP COMMANDS
 
-        if (cmd.getName().equalsIgnoreCase("tp"));
+        //Basic TP Command
+        if (cmd.getName().equalsIgnoreCase("tp")) {
+            return Teleport.tp(sender, args);
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("tphere"));
+        //TP Player to your position
+        else if (cmd.getName().equalsIgnoreCase("tphere")) {
+            return Teleport.tphere(sender, args);
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("tpa"));
+        else if (cmd.getName().equalsIgnoreCase("tpa")) {
+            return Teleport.tpa(sender, args);
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("tpaccept"));
+        else if (cmd.getName().equalsIgnoreCase("tpaccept")){
+            return Teleport.tpaccept(sender, args);
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("tpdeny"));
+        else if (cmd.getName().equalsIgnoreCase("tpdeny")){
+            return Teleport.tpdeny(sender, args);
+        }
 
         // Waypoints
 
-        else if (cmd.getName().equalsIgnoreCase("sethome"));
+        else if (cmd.getName().equalsIgnoreCase("sethome")) {
+            return Waypoints.sethome(sender);
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("home"));
+        else if (cmd.getName().equalsIgnoreCase("home")) {
+            return Waypoints.home(sender);
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("setspawn"));
+        else if (cmd.getName().equalsIgnoreCase("delhome")) {
+            return Waypoints.delhome(sender);
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("spawn"));
+        else if (cmd.getName().equalsIgnoreCase("setspawn")) {
+            return Waypoints.setspawn(sender);
+        }
+
+        else if (cmd.getName().equalsIgnoreCase("spawn")) {
+            return Waypoints.spawn(sender);
+        }
 
         // Player Chat Commands
 
-        else if (cmd.getName().equalsIgnoreCase("w") || cmd.getName().equalsIgnoreCase("whisper"));
+        else if (cmd.getName().equalsIgnoreCase("w") || cmd.getName().equalsIgnoreCase("whisper")) {
+            return Chat.whisper(sender, args);
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("announce"));
-
+        else if (cmd.getName().equalsIgnoreCase("say") || cmd.getName().equalsIgnoreCase("broadcast")) {
+            return Chat.broadcast(sender, args);
+        }
         //Player Info Commands
 
         else if (cmd.getName().equalsIgnoreCase("who"));

@@ -1,5 +1,6 @@
 package io.github.xNinjaKittyx.NKCore;
 
+import io.github.xNinjaKittyx.NKCore.Events.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -15,8 +16,6 @@ import java.io.*;
  */
 public class NKCore extends JavaPlugin {
 
-    //Variable controls whether or not PEX is on the server
-    public static boolean pex;
 
     //These are the Vault variables
     public static Permission perms = null;
@@ -65,10 +64,17 @@ public class NKCore extends JavaPlugin {
         }
         setupChat();
 
-        pex = isPexOn();
+        if(!isPexOn()) {
+            getLogger().severe("No Pex Dependency Found!");
+            return;
+        }
 
         //Event Handlers
         //new xEvent(this);
+
+        new MOTDEvent(this);
+        new ChatEvent(this);
+        new GodEvent(this);
 
         //Command Handlers
         //this.getCommand("Name of Command").setExecutor(new cmdEx(this));
