@@ -24,7 +24,7 @@ public class Teleport {
 
             Player player = (Player) sender;
             //Checking if the player has the permissions
-            if (!player.hasPermission("NKCore.tp.me")) {
+            if (! (player.hasPermission("NKCore.tp.me") || player.hasPermission("NKCore.admin") || player.hasPermission("NKCore.tp"))) {
                 ErrorMsg.noPermError(player);
                 return true;
             }
@@ -55,7 +55,7 @@ public class Teleport {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 //Checking if the player has the permissions
-                if (!player.hasPermission("NKCore.tp.other")) {
+                if (!(player.hasPermission("NKCore.tp.other") || player.hasPermission("NKCore.admin") || player.hasPermission("NKCore.tp"))) {
                     ErrorMsg.noPermError(player);
                     return true;
                 }
@@ -100,7 +100,7 @@ public class Teleport {
             }
 
             Player player = (Player) sender;
-            if (!player.hasPermission("NKCore.tp.xyz")) {
+            if (! (player.hasPermission("NKCore.tp.xyz") || player.hasPermission("NKCore.admin") || player.hasPermission("NKCore.tp"))) {
                 ErrorMsg.noPermError(player);
                 return true;
             }
@@ -135,7 +135,7 @@ public class Teleport {
 
         Player player = (Player) sender;
         //Checking if the player has the permissions
-        if (!player.hasPermission("NKCore.tp.here")) {
+        if (!(player.hasPermission("NKCore.tp.here") || player.hasPermission("NKCore.admin") || player.hasPermission("NKCore.tp"))) {
             ErrorMsg.noPermError(player);
             return true;
         }

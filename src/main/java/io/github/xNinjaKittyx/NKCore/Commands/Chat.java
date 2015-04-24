@@ -15,7 +15,7 @@ public class Chat {
     public static boolean broadcast(CommandSender sender,String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (!player.hasPermission("NKCore.chat.broadcast")) {
+            if (! (player.hasPermission("NKCore.chat.broadcast") || player.hasPermission("NKCore.admin") || player.hasPermission("NKCore.chat"))) {
                 ErrorMsg.noPermError(player);
                 return false;
             }
@@ -45,7 +45,7 @@ public class Chat {
             }
         }
         Player player = (Player) sender;
-        if (!player.hasPermission("NKCore.chat.whisper")) {
+        if (! (player.hasPermission("NKCore.chat.whisper") || player.hasPermission("NKCore.admin") || player.hasPermission("NKCore.chat"))) {
             ErrorMsg.noPermError(player);
             return true;
         }

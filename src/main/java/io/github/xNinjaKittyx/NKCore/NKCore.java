@@ -37,7 +37,7 @@ public class NKCore extends JavaPlugin {
     @Override
     // This is what happens when the Plugin is ENABLED
     public void onEnable() {
-
+        /*
         //Load the Config File that stores things like spawn position and house positions.
         configFile = new File(getDataFolder(), "config.yml");
 
@@ -50,6 +50,7 @@ public class NKCore extends JavaPlugin {
         config = new YamlConfiguration();
 
         loadYamls();
+        */
 
         //This lets us have access to the descriptions in plugin.yml
         PluginDescriptionFile pdfFile = this.getDescription();
@@ -59,7 +60,7 @@ public class NKCore extends JavaPlugin {
         getLogger().info("As of now, this is not reload friendly!");
 
         //Vault Init
-        if (setupPermissions() == false) {
+        if (!setupPermissions()) {
             getLogger().severe("No Vault Dependency Found!");
             getServer().getPluginManager().disablePlugin(this);
             return;
@@ -78,40 +79,72 @@ public class NKCore extends JavaPlugin {
         new ChatEvent(this);
         new GodEvent(this);
 
-        //Command Handlers
-        //this.getCommand("Name of Command").setExecutor(new cmdEx(this));
-        this.getCommand("tp").setExecutor(new cmdEx(this));
-        this.getCommand("tphere").setExecutor(new cmdEx(this));
-        this.getCommand("tpa").setExecutor(new cmdEx(this));
-        this.getCommand("tpaccept").setExecutor(new cmdEx(this));
-        this.getCommand("tpdeny").setExecutor(new cmdEx(this));
+        // Command Handlers
+        AbstractCommand newCmd = new cmdEx("tp", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("tp", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("tphere", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("tpa", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("tpaccept", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("tpdeny", "/<command> [args]", "TODO");
+        newCmd.register();
 
-        this.getCommand("sethome").setExecutor(new cmdEx(this));
-        this.getCommand("home").setExecutor(new cmdEx(this));
-        this.getCommand("setspawn").setExecutor(new cmdEx(this));
-        this.getCommand("spawn").setExecutor(new cmdEx(this));
+        newCmd = new cmdEx("sethome", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("home", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("setspawn", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("spawn", "/<command> [args]", "TODO");
+        newCmd.register();
 
-        this.getCommand("w").setExecutor(new cmdEx(this));
-        this.getCommand("whisper").setExecutor(new cmdEx(this));
-        this.getCommand("announce").setExecutor(new cmdEx(this));
+        newCmd = new cmdEx("w", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("whisper", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("say", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("broadcast", "/<command> [args]", "TODO");
+        newCmd.register();
 
-        this.getCommand("who").setExecutor(new cmdEx(this));
-        this.getCommand("players").setExecutor(new cmdEx(this));
+        newCmd = new cmdEx("whois", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("players", "/<command> [args]", "TODO");
+        newCmd.register();
 
-        this.getCommand("kick").setExecutor(new cmdEx(this));
-        this.getCommand("ban").setExecutor(new cmdEx(this));
-        this.getCommand("unban").setExecutor(new cmdEx(this));
-        this.getCommand("ipban").setExecutor(new cmdEx(this));
-        this.getCommand("mute").setExecutor(new cmdEx(this));
-        this.getCommand("unmute").setExecutor(new cmdEx(this));
-        this.getCommand("gag").setExecutor(new cmdEx(this));
+        newCmd = new cmdEx("kick", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("ban", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("unban", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("ipban", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("mute", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("unmute", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("gag", "/<command> [args]", "TODO");
+        newCmd.register();
 
-        this.getCommand("kill").setExecutor(new cmdEx(this));
-        this.getCommand("fly").setExecutor(new cmdEx(this));
-        this.getCommand("heal").setExecutor(new cmdEx(this));
-        this.getCommand("god").setExecutor(new cmdEx(this));
-        this.getCommand("repair").setExecutor(new cmdEx(this));
-        this.getCommand("speed").setExecutor(new cmdEx(this));
+        newCmd = new cmdEx("kill", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("fly", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("heal", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("god", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("repair", "/<command> [args]", "TODO");
+        newCmd.register();
+        newCmd = new cmdEx("speed", "/<command> [args]", "TODO");
+        newCmd.register();
+
+
     }
 
     // Functions to manage YAML config Files

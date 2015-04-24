@@ -5,14 +5,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import java.util.Arrays;
+
 /**
  * Created by Daniel on 4/16/2015.
  */
-public class cmdEx implements CommandExecutor{
+public class cmdEx extends AbstractCommand implements CommandExecutor {
 
-    private final NKCore plugin;
-
-    public cmdEx(NKCore plugin) {this.plugin = plugin;}
+    public cmdEx (String command, String usage, String description) {
+        super(command, usage, description);
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -106,7 +108,9 @@ public class cmdEx implements CommandExecutor{
             return Cheats.fly(sender, args);
         }
 
-        else if (cmd.getName().equalsIgnoreCase("heal"));
+        else if (cmd.getName().equalsIgnoreCase("heal")) {
+            return Cheats.heal(sender, args);
+        }
 
         else if (cmd.getName().equalsIgnoreCase("god")) {
             return Cheats.god(sender, args);

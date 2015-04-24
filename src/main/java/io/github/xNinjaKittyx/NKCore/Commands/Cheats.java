@@ -30,7 +30,8 @@ public class Cheats {
 
         // Set Player to allow flight
         if (args.length == 0) {
-            if (!player.hasPermission("NKCore.cheats.fly.me")) {
+            if (! (player.hasPermission("NKCore.cheats.fly.me") || player.hasPermission("NKCore.admin")
+                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.fly"))) {
                 ErrorMsg.noPermError(player);
                 return true;
             }
@@ -46,7 +47,8 @@ public class Cheats {
 
         // Allow different player to fly
         else if (args.length == 1) {
-            if (!player.hasPermission("NKCore.cheats.fly.others")) {
+            if (! (player.hasPermission("NKCore.cheats.fly.others") || player.hasPermission("NKCore.admin")
+                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.fly"))) {
                 ErrorMsg.noPermError(player);
                 return true;
             }
@@ -85,7 +87,8 @@ public class Cheats {
         Player player = (Player) sender;
         //Godmode myself
         if (args.length == 0) {
-            if (!player.hasPermission("NKCore.cheats.god.me")) {
+            if (! (player.hasPermission("NKCore.cheats.god.me") || player.hasPermission("NKCore.admin")
+                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.god"))) {
                 ErrorMsg.noPermError(player);
                 return true;
             }
@@ -101,7 +104,8 @@ public class Cheats {
 
         //Godmode someone else
         else if (args.length == 1) {
-            if (!player.hasPermission("NKCore.cheats.god.others")) {
+            if (! (player.hasPermission("NKCore.cheats.god.others") || player.hasPermission("NKCore.admin")
+                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.god"))) {
                 ErrorMsg.noPermError(player);
                 return true;
             }
@@ -161,14 +165,16 @@ public class Cheats {
         } else {
             player = (Player) sender;
             if (args.length == 0) {
-                if (!player.hasPermission("TestPlugin.heal.me")) {
+                if (! (player.hasPermission("TestPlugin.heal.me") || player.hasPermission("NKCore.admin")
+                        || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.heal"))) {
                     ErrorMsg.noPermError(player);
                     return true;
                 }
                 healPerson(player);
                 return true;
             } else if (args.length == 1) {
-                if (!player.hasPermission("TestPlugin.heal.others")) {
+                if (! (player.hasPermission("TestPlugin.heal.me") || player.hasPermission("NKCore.admin")
+                        || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.heal"))) {
                     ErrorMsg.noPermError(player);
                     return true;
                 }
