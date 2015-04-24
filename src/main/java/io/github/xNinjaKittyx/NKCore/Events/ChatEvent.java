@@ -1,7 +1,6 @@
 package io.github.xNinjaKittyx.NKCore.Events;
 
 import io.github.xNinjaKittyx.NKCore.NKCore;
-import io.github.xNinjaKittyx.NKCore.NKCore;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

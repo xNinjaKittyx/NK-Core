@@ -1,12 +1,12 @@
 package io.github.xNinjaKittyx.NKCore.Commands;
 
-import io.github.xNinjaKittyx.NKCore.NKCore;
+import io.github.xNinjaKittyx.NKCore.ErrorMsg;
 import io.github.xNinjaKittyx.NKCore.PEXRankCheck;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.ChatColor;
-import org.bukkit.Bukkit;
 
 /**
  * Created by Daniel on 4/16/2015.
@@ -18,21 +18,21 @@ public class Teleport {
         if (args.length == 1) {
             //Checking if it is a player sending the command
             if (!(sender instanceof Player)) {
-                sender.sendMessage(ChatColor.RED + "Console can't use this command!");
+                ErrorMsg.consoleSenderError(sender);
                 return false;
             }
 
+            Player player = (Player) sender;
             //Checking if the player has the permissions
-            if (!sender.hasPermission("NKCore.tp.me")) {
-                sender.sendMessage(ChatColor.RED + "You don't have permission!");
+            if (!player.hasPermission("NKCore.tp.me")) {
+                ErrorMsg.noPermError(player);
                 return true;
             }
-            Player player = (Player) sender;
             Player target = Bukkit.getPlayer(args[0]);
 
             //Check if Player is Online
             if (target == null) {
-                player.sendMessage(ChatColor.RED + args[0] + " is not Online");
+                ErrorMsg.notOnlineError(player, args[0]);
                 return false;
             }
 
@@ -44,8 +44,7 @@ public class Teleport {
 
             //Check if Player's rank is higher or not.
             if (PEXRankCheck.isLess(player, target)) {
-                sender.sendMessage(ChatColor.RED
-                        + "You can't TP to a player with a higher rank than you! You must send a tp request instead!");
+                ErrorMsg.highRankError(player);
                 return false;
             }
 
@@ -53,50 +52,59 @@ public class Teleport {
             return true;
         }
         else if (args.length == 2) {
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+                //Checking if the player has the permissions
+                if (!player.hasPermission("NKCore.tp.other")) {
+                    ErrorMsg.noPermError(player);
+                    return true;
+                }
 
-            //Checking if the player has the permissions
-            if (!sender.hasPermission("NKCore.tp.other")) {
-                sender.sendMessage(ChatColor.RED + "You don't have permission!");
-                return true;
             }
-            Player s = (Player) sender;
-            Player player = Bukkit.getPlayer(args[0]);
-            Player target = Bukkit.getPlayer(args[1]);
+            Player source = Bukkit.getPlayer(args[0]);
+            Player destination = Bukkit.getPlayer(args[1]);
 
             //Check if both players are Online
-            if (target == null || player == null) {
-                player.sendMessage(ChatColor.RED + args[0] + " is not Online");
+            if (source == null) {
+                ErrorMsg.notOnlineError(sender, args[0]);
+                return false;
+            }
+            else if(destination == null) {
+                ErrorMsg.notOnlineError(sender, args[1]);
                 return false;
             }
 
             //Check if both player and target are not the same person.
-            if (target == player) {
-                player.sendMessage(ChatColor.RED + "Teleporting a Player to itself makes no sense...");
+            if (source == destination) {
+                sender.sendMessage(ChatColor.RED + "You can't teleport a player to the same player!");
                 return false;
             }
 
 
-            if (PEXRankCheck.isLess(s, player) && PEXRankCheck.isLess(s, target)) {
-                sender.sendMessage(ChatColor.RED
-                        + "You can't TP a player with a higher rank than you!");
-                return false;
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+                if (PEXRankCheck.isLess(player, source) && PEXRankCheck.isLess(player, destination)) {
+                    ErrorMsg.highRankError(player);
+                    return false;
+                }
             }
 
-            player.teleport(target);
+            source.teleport(destination);
             return true;
         }
         else if (args.length == 3) {
 
             if (!(sender instanceof Player)) {
-                sender.sendMessage(ChatColor.GRAY + "Cannot be used by Non-Player");
+                ErrorMsg.consoleSenderError(sender);
                 return true;
             }
 
-            if (!sender.hasPermission("NKCore.tp.xyz")) {
-                sender.sendMessage(ChatColor.RED + "You don't have permission!");
+            Player player = (Player) sender;
+            if (!player.hasPermission("NKCore.tp.xyz")) {
+                ErrorMsg.noPermError(player);
                 return true;
             }
-            Player player = (Player) sender;
+
             try {
                 final double x = Double.parseDouble(args[0]);
                 final double y = Double.parseDouble(args[1]);
@@ -112,7 +120,7 @@ public class Teleport {
         }
 
         else {
-            sender.sendMessage(ChatColor.RED + "Invalid Arguments!");
+            ErrorMsg.invalidParamsError(sender);
             return false;
         }
     }
@@ -121,21 +129,21 @@ public class Teleport {
 
         //Checking if it is a player sending the command
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "Console can't use this command!");
+            ErrorMsg.consoleSenderError(sender);
             return false;
         }
 
+        Player player = (Player) sender;
         //Checking if the player has the permissions
-        if (!sender.hasPermission("NKCore.tp.here")) {
-            sender.sendMessage(ChatColor.RED + "You don't have permission!");
+        if (!player.hasPermission("NKCore.tp.here")) {
+            ErrorMsg.noPermError(player);
             return true;
         }
-        Player player = (Player) sender;
         Player target = Bukkit.getPlayer(args[0]);
 
         //Check if Player is Online
         if (target == null) {
-            player.sendMessage(ChatColor.RED + args[0] + " is not Online");
+            ErrorMsg.notOnlineError(player, args[0]);
             return false;
         }
 
@@ -147,8 +155,7 @@ public class Teleport {
 
         //Check if Player's rank is higher or not.
         if (PEXRankCheck.isLess(player, target)) {
-            sender.sendMessage(ChatColor.RED
-                    + "You can't TP to a player with a higher rank than you! You must send a tp request instead!");
+            ErrorMsg.highRankError(player);
             return false;
         }
 

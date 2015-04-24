@@ -19,8 +19,7 @@ public class GodEvent implements Listener {
 		Entity ent = e.getEntity();
 
 		if (ent instanceof Player) {
-			if (Cheats.god.godToggleList.contains(((Player) ent)
-					.getName()))
+			if (Cheats.godToggleList.contains(((Player) ent).getName()))
 				e.setCancelled(true);
 		} else {
 			e.setCancelled(false);

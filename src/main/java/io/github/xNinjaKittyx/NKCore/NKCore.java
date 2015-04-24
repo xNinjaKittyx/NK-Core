@@ -1,13 +1,15 @@
 package io.github.xNinjaKittyx.NKCore;
 
-import io.github.xNinjaKittyx.NKCore.Events.*;
+import io.github.xNinjaKittyx.NKCore.Events.ChatEvent;
+import io.github.xNinjaKittyx.NKCore.Events.GodEvent;
+import io.github.xNinjaKittyx.NKCore.Events.MOTDEvent;
+import net.milkbowl.vault.chat.Chat;
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import net.milkbowl.vault.chat.Chat;
-import net.milkbowl.vault.permission.Permission;
 
 import java.io.*;
 

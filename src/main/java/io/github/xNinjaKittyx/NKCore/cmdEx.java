@@ -74,9 +74,13 @@ public class cmdEx implements CommandExecutor{
         }
         //Player Info Commands
 
-        else if (cmd.getName().equalsIgnoreCase("who"));
+        else if (cmd.getName().equalsIgnoreCase("whois")) {
+            return Info.whois(sender, args);
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("players"));
+        else if (cmd.getName().equalsIgnoreCase("players") || cmd.getName().equalsIgnoreCase("who")) {
+            return Info.players(sender, args);
+        }
 
         // Player Management
 
@@ -98,11 +102,15 @@ public class cmdEx implements CommandExecutor{
 
         else if (cmd.getName().equalsIgnoreCase("kill"));
 
-        else if (cmd.getName().equalsIgnoreCase("fly"));
+        else if (cmd.getName().equalsIgnoreCase("fly")) {
+            return Cheats.fly(sender, args);
+        }
 
         else if (cmd.getName().equalsIgnoreCase("heal"));
 
-        else if (cmd.getName().equalsIgnoreCase("god"));
+        else if (cmd.getName().equalsIgnoreCase("god")) {
+            return Cheats.god(sender, args);
+        }
 
         else if (cmd.getName().equalsIgnoreCase("repair"));
 

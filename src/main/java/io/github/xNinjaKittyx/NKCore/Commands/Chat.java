@@ -1,9 +1,9 @@
 package io.github.xNinjaKittyx.NKCore.Commands;
 
+import io.github.xNinjaKittyx.NKCore.ErrorMsg;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -13,9 +13,12 @@ import org.bukkit.entity.Player;
 public class Chat {
 
     public static boolean broadcast(CommandSender sender,String[] args) {
-        if (!sender.hasPermission("NKCore.broadcast")) {
-            sender.sendMessage(ChatColor.RED + "You don't have permission!");
-            return true;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            if (!player.hasPermission("NKCore.chat.broadcast")) {
+                ErrorMsg.noPermError(player);
+                return false;
+            }
         }
         if (args.length == 0)
             return false;
@@ -30,7 +33,7 @@ public class Chat {
         if (!(sender instanceof Player)) {
             Player t = Bukkit.getPlayer(args[0]);
             if (t == null) {
-                sender.sendMessage(ChatColor.RED + args[0] + "is not Online");
+                ErrorMsg.notOnlineError(sender,  args[0]);
                 return false;
             } else {
 
@@ -42,8 +45,8 @@ public class Chat {
             }
         }
         Player player = (Player) sender;
-        if (!player.hasPermission("NKCore.whisper")) {
-            sender.sendMessage(ChatColor.RED + "You don't have permission!");
+        if (!player.hasPermission("NKCore.chat.whisper")) {
+            ErrorMsg.noPermError(player);
             return true;
         }
         if (args.length < 2) {
@@ -52,7 +55,7 @@ public class Chat {
 
         Player target = player.getServer().getPlayer(args[0]);
         if (target == null) {
-            player.sendMessage(ChatColor.RED + args[0] + "is not Online");
+            ErrorMsg.notOnlineError(player, args[0]);
             return false;
         } else {
 
