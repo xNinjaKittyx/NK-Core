@@ -32,7 +32,7 @@ public class NKCore extends JavaPlugin {
     public void onDisable() {
         getLogger().info("NKCore Disabled");
         getLogger().info("Thank you for using NKCore");
-        saveYamls();
+        //saveYamls();
     }
     @Override
     // This is what happens when the Plugin is ENABLED

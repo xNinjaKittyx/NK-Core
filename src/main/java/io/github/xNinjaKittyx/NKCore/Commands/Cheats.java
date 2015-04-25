@@ -1,10 +1,12 @@
 package io.github.xNinjaKittyx.NKCore.Commands;
 
 import io.github.xNinjaKittyx.NKCore.ErrorMsg;
+import io.github.xNinjaKittyx.NKCore.PEXRankCheck;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +32,8 @@ public class Cheats {
 
         // Set Player to allow flight
         if (args.length == 0) {
-            if (! (player.hasPermission("NKCore.cheats.fly.me") || player.hasPermission("NKCore.admin")
-                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.fly"))) {
+            if (! (player.hasPermission("NKCore.cheat.fly.me") || player.hasPermission("NKCore.admin")
+                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.cheat.fly"))) {
                 ErrorMsg.noPermError(player);
                 return true;
             }
@@ -47,8 +49,8 @@ public class Cheats {
 
         // Allow different player to fly
         else if (args.length == 1) {
-            if (! (player.hasPermission("NKCore.cheats.fly.others") || player.hasPermission("NKCore.admin")
-                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.fly"))) {
+            if (! (player.hasPermission("NKCore.cheat.fly.others") || player.hasPermission("NKCore.admin")
+                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.cheat.fly"))) {
                 ErrorMsg.noPermError(player);
                 return true;
             }
@@ -56,7 +58,7 @@ public class Cheats {
             Player target = player.getServer().getPlayer(args[0]);
             if (target == null) {
                 ErrorMsg.notOnlineError(player, args[0]);
-                return false;
+                return true;
             }
             if (target.getAllowFlight()) {
                 target.setAllowFlight(false);
@@ -87,8 +89,8 @@ public class Cheats {
         Player player = (Player) sender;
         //Godmode myself
         if (args.length == 0) {
-            if (! (player.hasPermission("NKCore.cheats.god.me") || player.hasPermission("NKCore.admin")
-                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.god"))) {
+            if (! (player.hasPermission("NKCore.cheat.god.me") || player.hasPermission("NKCore.admin")
+                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.cheat.god"))) {
                 ErrorMsg.noPermError(player);
                 return true;
             }
@@ -104,15 +106,15 @@ public class Cheats {
 
         //Godmode someone else
         else if (args.length == 1) {
-            if (! (player.hasPermission("NKCore.cheats.god.others") || player.hasPermission("NKCore.admin")
-                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.god"))) {
+            if (! (player.hasPermission("NKCore.cheat.god.others") || player.hasPermission("NKCore.admin")
+                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.cheat.god"))) {
                 ErrorMsg.noPermError(player);
                 return true;
             }
             Player target = player.getServer().getPlayer(args[0]);
             if (target == null) {
                 ErrorMsg.notOnlineError(player, args[0]);
-                return false;
+                return true;
             } else {
 
                 if (!(godToggleList.contains(target.getName()))) {
@@ -149,46 +151,128 @@ public class Cheats {
         if (!(sender instanceof Player)) {
             if (args.length == 0) {
                 ErrorMsg.consoleSenderError(sender);
-                return false;
+                return true;
             } else if (args.length == 1) {
 
                 Player target = Bukkit.getServer().getPlayer(args[0]);
                 if (target == null) {
                     ErrorMsg.notOnlineError(sender, args[0]);
-                    return false;
+                    return true;
                 }
                 healPerson(target);
                 return true;
+            } else {
+                ErrorMsg.invalidParamsError(sender);
+                return false;
             }
-            return false;
 
         } else {
             player = (Player) sender;
             if (args.length == 0) {
-                if (! (player.hasPermission("TestPlugin.heal.me") || player.hasPermission("NKCore.admin")
-                        || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.heal"))) {
+                if (! (player.hasPermission("NKCore.cheat.heal.me") || player.hasPermission("NKCore.admin")
+                        || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.cheat.heal"))) {
                     ErrorMsg.noPermError(player);
                     return true;
                 }
                 healPerson(player);
                 return true;
             } else if (args.length == 1) {
-                if (! (player.hasPermission("TestPlugin.heal.me") || player.hasPermission("NKCore.admin")
-                        || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.heal"))) {
+                if (! (player.hasPermission("NKCore.cheat.heal.me") || player.hasPermission("NKCore.admin")
+                        || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.cheat.heal"))) {
                     ErrorMsg.noPermError(player);
                     return true;
                 }
                 Player target = Bukkit.getServer().getPlayer(args[0]);
                 if (target == null) {
                     ErrorMsg.notOnlineError(player, args[0]);
-                    return false;
+                    return true;
                 }
 
                 healPerson(target);
 
                 return true;
-            } else
+            } else {
+                ErrorMsg.invalidParamsError(sender);
                 return false;
+            }
         }
+    }
+    public static boolean kill(CommandSender sender, String args[]) {
+
+
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+
+            if (!(player.hasPermission("NKCore.kill") || player.hasPermission("NKCore.admin")
+                    || player.hasPermission("NKCore.cheat") || player.hasPermission("NKCore.cheat.kill"))) {
+                ErrorMsg.noPermError(player);
+                return true;
+            }
+            Player target = player.getServer().getPlayer(args[0]);
+            if (args.length < 1) {
+                ErrorMsg.invalidParamsError(sender);
+                return false;
+            }
+
+            if (target == null) {
+                ErrorMsg.notOnlineError(player, args[0]);
+                return true;
+            } else {
+
+                if (PEXRankCheck.isLess(player, target)) {
+                    ErrorMsg.highRankError(player);
+                    return true;
+                }
+                target.setHealth(0);
+                return true;
+            }
+        } else {
+            Player target = Bukkit.getServer().getPlayer(args[0]);
+            if (args.length < 1) {
+                ErrorMsg.invalidParamsError(sender);
+                return false;
+            }
+            if (target == null) {
+                ErrorMsg.notOnlineError(sender, args[0]);
+                return true;
+            } else {
+
+                target.setHealth(0);
+            }
+            return true;
+        }
+    }
+
+    public static boolean repair(CommandSender sender) {
+
+        if (!(sender instanceof Player)) {
+            ErrorMsg.consoleSenderError(sender);
+            return true;
+        }
+
+        Player player = (Player) sender;
+        if (!(player.hasPermission("NKCore.cheat.repair") || player.hasPermission("NKCore.admin") || player.hasPermission("NKCore.cheat"))) {
+            ErrorMsg.noPermError(player);
+            return true;
+        }
+        ItemStack i = player.getItemInHand();
+        i.setDurability((short)0);
+        player.sendMessage(ChatColor.GREEN + "Repaired!");
+        return true;
+    }
+
+    public static boolean speed(CommandSender sender, String args[]) {
+        if (!(sender instanceof Player)) {
+        ErrorMsg.consoleSenderError(sender);
+        return true;
+        }
+
+        Player player = (Player) sender;
+        if (!(player.hasPermission("NKCore.cheat.speed") || player.hasPermission("NKCore.admin") || player.hasPermission("NKCore.cheat"))) {
+            ErrorMsg.noPermError(player);
+            return true;
+        }
+        //TODO: SPEED
+        return true;
     }
 }

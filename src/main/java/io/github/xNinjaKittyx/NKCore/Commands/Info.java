@@ -68,7 +68,7 @@ public class Info {
         ArrayList<String> onlinePlayers = new ArrayList<String>();
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if ( (player.hasPermission("TestPlugin.who") || player.hasPermission("NKCore.admin") || player.hasPermission("NKCore.info"))) {
+            if ( (player.hasPermission("NKCore.info.players") || player.hasPermission("NKCore.admin") || player.hasPermission("NKCore.info"))) {
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     onlinePlayers.add(p.getName());
                 }

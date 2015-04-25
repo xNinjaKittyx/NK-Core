@@ -86,23 +86,39 @@ public class cmdEx extends AbstractCommand implements CommandExecutor {
 
         // Player Management
 
-        else if (cmd.getName().equalsIgnoreCase("kick"));
+        else if (cmd.getName().equalsIgnoreCase("kick")) {
+            return Management.kick();
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("ban"));
+        else if (cmd.getName().equalsIgnoreCase("ban")) {
+            return Management.ban();
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("unban"));
+        else if (cmd.getName().equalsIgnoreCase("unban")) {
+            return Management.unban();
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("ipban"));
+        else if (cmd.getName().equalsIgnoreCase("ipban")) {
+            return Management.ipban();
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("mute"));
+        else if (cmd.getName().equalsIgnoreCase("mute")) {
+            return Management.mute();
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("unmute"));
+        else if (cmd.getName().equalsIgnoreCase("unmute")) {
+            return Management.unmute();
+        }
 
-        else if (cmd.getName().equalsIgnoreCase("gag"));
+        else if (cmd.getName().equalsIgnoreCase("gag")) {
+            return Management.gag();
+        }
 
         // Cheats
 
-        else if (cmd.getName().equalsIgnoreCase("kill"));
+        else if (cmd.getName().equalsIgnoreCase("kill")) {
+            return Cheats.kill(sender, args);
+        }
 
         else if (cmd.getName().equalsIgnoreCase("fly")) {
             return Cheats.fly(sender, args);
@@ -116,16 +132,18 @@ public class cmdEx extends AbstractCommand implements CommandExecutor {
             return Cheats.god(sender, args);
         }
 
-        else if (cmd.getName().equalsIgnoreCase("repair"));
-
-        else if (cmd.getName().equalsIgnoreCase("speed"));
-
-        if (cmd.getName().equalsIgnoreCase("")) {
-            return false;
+        else if (cmd.getName().equalsIgnoreCase("repair")) {
+            return Cheats.repair(sender);
         }
 
-        sender.sendMessage("Something went wrong with the command. This message means that there's a boolean leak in the command.");
-        return false;
+        else if (cmd.getName().equalsIgnoreCase("speed")) {
+            return Cheats.speed(sender, args);
+        }
+
+        else {
+            sender.sendMessage("Invalid Command!");
+            return true;
+        }
 
     }
 }

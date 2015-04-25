@@ -17,7 +17,7 @@ public class Chat {
             Player player = (Player) sender;
             if (! (player.hasPermission("NKCore.chat.broadcast") || player.hasPermission("NKCore.admin") || player.hasPermission("NKCore.chat"))) {
                 ErrorMsg.noPermError(player);
-                return false;
+                return true;
             }
         }
         if (args.length == 0)
@@ -34,7 +34,7 @@ public class Chat {
             Player t = Bukkit.getPlayer(args[0]);
             if (t == null) {
                 ErrorMsg.notOnlineError(sender,  args[0]);
-                return false;
+                return true;
             } else {
 
                 String message = StringUtils.join(args, ' ', 1, args.length);
@@ -56,7 +56,7 @@ public class Chat {
         Player target = player.getServer().getPlayer(args[0]);
         if (target == null) {
             ErrorMsg.notOnlineError(player, args[0]);
-            return false;
+            return true;
         } else {
 
             String message = StringUtils.join(args, ' ', 1, args.length);
